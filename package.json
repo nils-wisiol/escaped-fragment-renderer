@@ -1,0 +1,19 @@
+{
+  "name": "escaped-fragment-renderer",
+  "version": "0.1.0",
+  "description": "JS-Enabled Rendering of Websites based on Google's _escaped_fragment_ agreement. ",	
+  "scripts": {
+	"start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ajax",
+    "google",
+    "escapedfragment"
+  ],
+  "author": "Nils Wisiol",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "express": "~4.10.7"
+  }
+}
