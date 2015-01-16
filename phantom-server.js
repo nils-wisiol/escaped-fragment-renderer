@@ -25,9 +25,8 @@ page.onResourceRequested = function (request) {
 page.open(system.args[1], function () {});
 
 var checkComplete = function () {
-	// We don't allow it to take longer than 5 seconds but
-	// don't return until all requests are finished
-	if((new Date().getTime() - lastReceived > 300 && requestCount === responseCount) || new Date().getTime() - startTime > 5000)  {
+	// Wait until 1.5s after the last request was completed, or 7.5s total.
+	if((new Date().getTime() - lastReceived > 1500 && requestCount === responseCount) || new Date().getTime() - startTime > 7500)  {
 		clearInterval(checkCompleteInterval);
 		console.log(page.content);
 		phantom.exit();
