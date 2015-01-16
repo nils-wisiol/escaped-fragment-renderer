@@ -31,6 +31,8 @@ var respond = function (req, res) {
 	var url = 'http://' + req.headers['host'] + '/#!' + decodeURIComponent(req.query['_escaped_fragment_']);
 	
 	getContent(url, function (content) {
+		res.set({'X-Original-URL': url});
+		res.set({'X-Resolved-URL': (content.match(/<!-- X-Resolved-URL: ((.*)) -->/) || ["",""])[1]})
 		res.send(content);
 	});
 }

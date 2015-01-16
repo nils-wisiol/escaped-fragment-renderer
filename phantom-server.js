@@ -29,6 +29,10 @@ var checkComplete = function () {
 	if((new Date().getTime() - lastReceived > 1500 && requestCount === responseCount) || new Date().getTime() - startTime > 7500)  {
 		clearInterval(checkCompleteInterval);
 		console.log(page.content);
+		var url = page.evaluate(function() {
+			return document.URL;
+		})
+		console.log('<!-- X-Resolved-URL: ' + url + ' -->');
 		phantom.exit();
 	}
 }
