@@ -23,7 +23,8 @@ page.onResourceRequested = function (request) {
 
 // Open the page
 page.customHeaders = {
-	'Accept-Language': system.args[2]
+	'Accept-Language': system.args[2],
+	'DNT': 1,
 };
 page.open(system.args[1], function () {});
 
