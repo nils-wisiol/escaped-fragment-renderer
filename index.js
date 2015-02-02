@@ -5,11 +5,11 @@ var express = require('express');
 var app = express();
 
 
-var getContent = function(url, callback) {
+var getContent = function(url, acceptLanguage, callback) {
 	var content = '';
 	// Here we spawn a phantom.js process, the first element of the 
 	// array is our phantomjs script and the second element is our url 
-	var phantom = require('child_process').spawn('phantomjs', ['phantom-server.js', url]);
+	var phantom = require('child_process').spawn('phantomjs', ['phantom-server.js', url, acceptLanguage]);
 	phantom.stdout.setEncoding('utf8');
 	// Our phantom.js script is simply logging the output and
 	// we access it here through stdout
@@ -28,9 +28,12 @@ var getContent = function(url, callback) {
 };
 
 var respond = function (req, res) {
-	var url = 'http://' + req.headers['host'] + '/#!' + decodeURIComponent(req.query['_escaped_fragment_']);
+	var url = 'http://localhost:9000/#!' + decodeURIComponent(req.query['_escaped_fragment_']);
+	var acceptLanguage = req.header('Accept-Language');
 	
-	getContent(url, function (content) {
+	console.log(acceptLanguage + ': ' + url);
+	
+	getContent(url, acceptLanguage, function (content) {
 		res.set({'X-Original-URL': url});
 		res.set({'X-Resolved-URL': (content.match(/<!-- X-Resolved-URL: ((.*)) -->/) || ["",""])[1]})
 		res.send(content);

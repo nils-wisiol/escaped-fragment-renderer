@@ -22,6 +22,9 @@ page.onResourceRequested = function (request) {
 };
 
 // Open the page
+page.customHeaders = {
+	'Accept-Language': system.args[2]
+};
 page.open(system.args[1], function () {});
 
 var checkComplete = function () {
@@ -33,6 +36,7 @@ var checkComplete = function () {
 			return document.URL;
 		})
 		console.log('<!-- X-Resolved-URL: ' + url + ' -->');
+		console.log('<!-- X-Used-Accept-Language: ' + page.customHeaders['Accept-Language'] + ' -->');
 		phantom.exit();
 	}
 }
