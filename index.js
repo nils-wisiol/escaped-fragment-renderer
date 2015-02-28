@@ -36,6 +36,7 @@ var respond = function (req, res) {
 	getContent(url, acceptLanguage, function (content) {
 		res.set({'X-Original-URL': url});
 		res.set({'X-Resolved-URL': (content.match(/<!-- X-Resolved-URL: ((.*)) -->/) || ["",""])[1]})
+		res.set({'Expires': 'Thu, 31 Dec 2037 23:55:55 GMT'});
 		res.send(content);
 	});
 }
