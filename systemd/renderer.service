@@ -1,0 +1,13 @@
+[Unit]
+Description=rendering service for escaped fragments
+After=network.target
+
+[Service]
+Type=simple
+Environment=statedir=/var/cache/foo
+ExecStart=/usr/bin/npm start
+User=renderer
+WorkingDirectory=/opt/escaped-fragment-renderer
+
+[Install]
+WantedBy=multi-user.target
